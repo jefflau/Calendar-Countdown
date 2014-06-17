@@ -1,0 +1,41 @@
+<head>
+<title>Countdown Calendar</title>
+</head>
+
+<template name="layout">
+  {{> yield}}
+</template>
+
+<template name="main">
+	Main Template
+	<!--{{#if currentGoal}}
+		{{>goalCalendar}}
+	{{else}} -->
+		{{>goalCreator}}
+	<!--{{/if}}-->
+</template>
+
+<template name="goalCreator">
+	<div class="goal-creator">
+		<p>What is your goal?</p>
+		<input type="text" id="goal-name" placeholder="Quitting smoking">
+		<p>How many days would you like to do it?</p>
+		<input type="number" id="goal-period" placeholder="30">
+		<a href="#0" id="start">Start</a>
+		<p>Everyday strike a day off the list and post proof of your goal!</p>
+	</div>
+</template>
+
+<template name="goalCalendar">
+	<h2>{{name}}</h2>
+	<div class="goal-calendar">
+		{{daysLeft length days}}
+		{{#each days}}
+			<div class="day {{#if completed}}completed{{/if}}">
+				<div class="content">
+				{{getDate date}}
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</template>

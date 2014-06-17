@@ -1,0 +1,15 @@
+.goal-calendar {
+  margin: 0 auto 0;
+  width: 90%; }
+
+.day {
+  background: blue;
+  float: left;
+  height: 0;
+  width: 12.57143%;
+  padding-bottom: 12.57143%; }
+  .day:nth-child(n) {
+    margin-bottom: 2%;
+    margin-right: 2%; }
+  .day:nth-child(7n) {
+    margin-right: 0; }
