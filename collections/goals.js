@@ -26,7 +26,6 @@ Meteor.methods({
 	},
 
 	dayComplete: function(goalId, day) {
-		console.log(day);
 		var field = 'days.'+day+'.completed';
 		Goals.update({_id: goalId, "days.id": day}, {
 			$set: { "days.$.completed" : true } 

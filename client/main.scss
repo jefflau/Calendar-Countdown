@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 @mixin rowMachine($numPerRow, $margin) {
 	height: 0;
   width: ((100% - (($numPerRow - 1) * $margin)) / $numPerRow);
@@ -12,13 +16,58 @@
   }
 }
 
+body {
+  font-family: Helvetica;
+}
+
+// Goal Creator
+
+#start {
+  color: white;
+  background: black;
+  text-decoration: none;
+  padding: 10px 20px;
+  &:hover {
+    background: #333;
+  }
+}
+
+// Goal Calendar
+
 .goal-calendar {
 	margin: 0 auto 0;
 	width: 90%;
 }
 
 .day {
-	background: blue;
+	background: white;
+  border: black 1px solid;
+  border-top: black 5px solid;
 	float: left;
+  position: relative;
 	@include rowMachine(7, 2%);
+  .date {
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.days-left {
+  background: red;
+  font-size: 18px;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.completed {
+  background: green;
 }

@@ -7,7 +7,6 @@
 </template>
 
 <template name="main">
-	Main Template
 	<!--{{#if currentGoal}}
 		{{>goalCalendar}}
 	{{else}} -->
@@ -17,25 +16,26 @@
 
 <template name="goalCreator">
 	<div class="goal-creator">
-		<p>What is your goal?</p>
-		<input type="text" id="goal-name" placeholder="Quitting smoking">
-		<p>How many days would you like to do it?</p>
-		<input type="number" id="goal-period" placeholder="30">
+		<p>I would like to <input type="text" id="goal-name" placeholder="learn meteor"> everyday for <input type="number" id="goal-period" placeholder="30"> days</p>
+		
 		<a href="#0" id="start">Start</a>
-		<p>Everyday strike a day off the list and post proof of your goal!</p>
 	</div>
 </template>
 
 <template name="goalCalendar">
-	<h2>{{name}}</h2>
+	
 	<div class="goal-calendar">
-		{{daysLeft length days}}
+		<h2>{{name}}</h2>
+		<div class="days-left">{{daysLeft length days}}</div>
+		<div class="days-wrapper">
 		{{#each days}}
 			<div class="day {{#if completed}}completed{{/if}}">
-				<div class="content">
+				<div class="date">
 				{{getDate date}}
 				</div>
 			</div>
+
 		{{/each}}
+		</div>
 	</div>
 </template>

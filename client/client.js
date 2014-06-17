@@ -20,6 +20,7 @@ Template.goalCreator.events({
 
 Template.goalCalendar.events({
 	'click .day': function(e, template) {
+		//commented out the validation so calendar actually does something for people to play around!
 		//if(Template.goalCalendar.getDate(this.date) === new Date().getDate()) {
 			Meteor.call('dayComplete', Router.current().params._id, this.id,  function(error, affectedDocs) {
 			  if (error) {
@@ -35,23 +36,22 @@ Template.goalCalendar.events({
 });
 
 Template.goalCalendar.goal = function() {
-	return Goals.findOne({_id : Session.get('currentGoal')});
+	return Goals.findOne({_id : Router.current().params._id});
 };
 
 Template.goalCalendar.getDate = function(date) {
 	return date.getDate();
 };
 
-Template.goalCalendar.daysLeft = function(length, days) {
-	days = days.reduce(function(prev, curr, i){
-		if (curr.completed === true) {
-			return prev + 1;
-		}
-	}, 0);
+Template.goalCalendar.daysLeft = function(length) {
+	var days = Goals.findOne({_id : Router.current().params._id}).days;
+	var completed = 0;
 
-	if(days === undefined) {
-		days = 0;
-	}
-	
-	return length - days;
+	days.map(function(ele){
+		if(ele.completed) {
+			completed++;
+		}
+	})
+
+	return length - completed;
 };
