@@ -12,6 +12,13 @@ Template.goalCreator.events({
 		goal.startDate = new Date();
 		goal.length = parseInt(template.find('#goal-period').value);
 
+		if (!goal.name) {
+			alert('Please insert a valid name');
+		}
+		if (isNaN(goal.length) || goal.length <= 0) {
+			alert('Please insert a valid duration');
+		}
+
 		Meteor.call('goal', goal, function(error, id) {
 			Router.go('goalCalendar', {_id: id});
 		});
