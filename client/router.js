@@ -1,9 +1,6 @@
 Router.configure({
 	layoutTemplate: 'layout',
-	loadingTemplate: 'loading',
-	waitOn: function() { 
-		return [Meteor.subscribe('goals')]; 
-	}
+	loadingTemplate: 'loading'
 });
 
 Router.map(function(){
@@ -12,7 +9,8 @@ Router.map(function(){
 	});
 	this.route('goalCalendar', { 
 		path: '/goal/:_id',
-		data: function() { return Goals.findOne(this.params._id); }
+		data: function() { return Goals.findOne(this.params._id); },
+    waitOn: function() { return Meteor.subscribe('singleGoal', this.params._id); }
 	});
 	this.route('goalCreator', {
 		path: '/create'
