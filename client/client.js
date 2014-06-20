@@ -12,7 +12,7 @@ Template.goalCreator.events({
 		goal.startDate = new Date();
 		goal.length = parseInt(template.find('#goal-period').value);
 
-		Meteor.call('goal', goal, function(error, id) {
+		Meteor.call('createGoal', goal, function(error, id) {
 			Router.go('goalCalendar', {_id: id});
 		});
 	}
@@ -22,22 +22,13 @@ Template.goalCalendar.events({
 	'click .day': function(e, template) {
 		//commented out the validation so calendar actually does something for people to play around!
 		//if(Template.goalCalendar.getDate(this.date) === new Date().getDate()) {
-			Meteor.call('dayComplete', Router.current().params._id, this.id,  function(error, affectedDocs) {
+			Meteor.call('completeDay', Router.current().params._id, this.id,  function(error, affectedDocs) {
 			  if (error) {
 			    console.log(error.message);
-			  } else {
-			    // Do whatever
-  			}
+			  }
   		});
-		//} else {
-
-		//}
 	}
 });
-
-Template.goalCalendar.goal = function() {
-	return Goals.findOne({_id : Router.current().params._id});
-};
 
 Template.goalCalendar.getDate = function(date) {
 	return date.getDate();
